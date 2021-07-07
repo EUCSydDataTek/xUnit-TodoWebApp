@@ -1,0 +1,39 @@
+﻿@page "{id}"
+@model TodoWebApp.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Todo Item</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TodoItem.Id" />
+            <div class="form-group">
+                <label asp-for="TodoItem.TaskDescription" class="control-label"></label>
+                <input asp-for="TodoItem.TaskDescription" class="form-control" />
+                <span asp-validation-for="TodoItem.TaskDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <input asp-for="TodoItem.IsCompleted" class="form-check-input" />
+                <label asp-for="TodoItem.IsCompleted" class="form-check-label"></label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

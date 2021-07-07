@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Todo App";
+}
+
+<h1>Todo App</h1>
+
+<p>
+    <a asp-page="Create">Create New Todo</a>
+</p>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].TaskDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].IsCompleted)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (var item = 0; item < Model.TodoItems.Count(); item++)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" asp-for="TodoItems[item].Id" />
+                        @Model.TodoItems[item].Id
+                    </td>
+                    <td>
+                        @Model.TodoItems[item].TaskDescription
+                    </td>
+                    <td>
+
+                        @Html.CheckBoxFor(t => t.TodoItems[item].IsCompleted, new { onclick = "this.form.submit();" })
+
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@Model.TodoItems[item].Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@Model.TodoItems[item].Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@Model.TodoItems[item].Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</form>
