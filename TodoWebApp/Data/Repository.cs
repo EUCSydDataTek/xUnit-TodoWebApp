@@ -15,14 +15,15 @@ namespace TodoWebApp.Data
         {
             TodoItemList = new List<TodoItem>
             {
-                new TodoItem { TaskDescription = "Task 1", Priority = PriorityLevel.Important},
-                new TodoItem { TaskDescription = "Task 2", IsCompleted = false }
+                new TodoItem { TaskDescription = "Task 1", Priority = PriorityLevel.Low},
+                new TodoItem { TaskDescription = "Task 2", IsCompleted = false },
+                new TodoItem { TaskDescription = "Task 3", IsCompleted = false, Priority = PriorityLevel.High }
             };
         }
         public List<TodoItem> GetAll()
         {
-            return TodoItemList;
-            //return TodoItemList.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).ToList();
+            //return TodoItemList;
+            return TodoItemList.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).ToList();
         }
 
         public TodoItem GetItemById(Guid id)
@@ -41,6 +42,7 @@ namespace TodoWebApp.Data
             item.TaskDescription = todoItem.TaskDescription;
             item.Priority = todoItem.Priority;
             item.IsCompleted = todoItem.IsCompleted;
+            item.CreatedTime = todoItem.CreatedTime;
         }
 
         public void Remove(Guid id)

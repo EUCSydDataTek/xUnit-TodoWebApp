@@ -1,5 +1,6 @@
 ﻿@page "{id}"
 @model TodoWebApp.Pages.EditModel
+@using TodoWebApp.Models
 @{
     ViewData["Title"] = "Edit";
 }
@@ -14,6 +15,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TodoItem.Id" />
             <div class="form-group">
+                <label asp-for="TodoItem.CreatedTime" class="control-label"></label>
+                <input asp-for="TodoItem.CreatedTime" class="form-control" />
+            </div>
+            <div class="form-group">
                 <label asp-for="TodoItem.TaskDescription" class="control-label"></label>
                 <input asp-for="TodoItem.TaskDescription" class="form-control" />
                 <span asp-validation-for="TodoItem.TaskDescription" class="text-danger"></span>
@@ -22,8 +27,17 @@
                 <input asp-for="TodoItem.IsCompleted" class="form-check-input" />
                 <label asp-for="TodoItem.IsCompleted" class="form-check-label"></label>
             </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Priority</label>
+                <select class="form-control" asp-for="TodoItem.Priority" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
+                    <option value="">Choose a priority</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="./Delete" asp-route-id="@Model.TodoItem.Id" class="btn btn-danger">Delete</a>
             </div>
         </form>
 

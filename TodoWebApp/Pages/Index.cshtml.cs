@@ -22,6 +22,9 @@ namespace TodoWebApp.Pages
         [BindProperty]
         public List<TodoItem> TodoItems { get; set; }
 
+        [BindProperty]
+        public PriorityLevel Priority { get; set; }
+
         public void OnGet()
         {
             TodoItems = _context.GetAll();

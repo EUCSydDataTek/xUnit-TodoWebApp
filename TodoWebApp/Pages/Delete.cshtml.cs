@@ -15,7 +15,20 @@ namespace TodoWebApp.Pages
             _context = context;
         }
 
+        public TodoItem TodoItem { get; set; }
+
         public IActionResult OnGet(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
+
+            TodoItem = _context.GetItemById(id);
+            return Page();
+        }
+
+        public IActionResult OnGetDelete(Guid id)
         {
             if (id == Guid.Empty)
             {
@@ -27,7 +40,7 @@ namespace TodoWebApp.Pages
             if (TodoItem != null)
             {
                 _context.Remove(TodoItem.Id);
-                return RedirectToPage("./Index");             
+                return RedirectToPage("./Index");
             }
             return NotFound();
         }

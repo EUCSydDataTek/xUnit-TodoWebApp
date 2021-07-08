@@ -14,40 +14,44 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.TodoItems[0].Id)
+                    @Html.DisplayNameFor(model => model.TodoItems[0].IsCompleted)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.TodoItems[0].TaskDescription)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TodoItems[0].IsCompleted)
+                    @Html.DisplayNameFor(model => model.TodoItems[0].Priority)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].CreatedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].Id)
+                </th>
             </tr>
         </thead>
         <tbody>
 
-            @for (var item = 0; item < Model.TodoItems.Count(); item++)
+            @for (var i = 0; i < Model.TodoItems.Count(); i++)
             {
-                <tr>
-                    <td>
-                        <input type="hidden" asp-for="TodoItems[item].Id" />
-                        @Model.TodoItems[item].Id
-                    </td>
-                    <td>
-                        @Model.TodoItems[item].TaskDescription
-                    </td>
-                    <td>
-
-                        @Html.CheckBoxFor(t => t.TodoItems[item].IsCompleted, new { onclick = "this.form.submit();" })
-
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@Model.TodoItems[item].Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@Model.TodoItems[item].Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@Model.TodoItems[item].Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" asp-for="TodoItems[i].IsCompleted" onclick="this.form.submit()" />
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@Model.TodoItems[i].Id">@Model.TodoItems[i].TaskDescription</a>
+                </td>
+                <td>
+                    @Model.TodoItems[i].Priority
+                </td>
+                <td>
+                    @Model.TodoItems[i].CreatedTime
+                </td>
+                <td>
+                    <input type="hidden" asp-for="TodoItems[i].Id" />
+                    @Model.TodoItems[i].Id
+                </td>
+            </tr>
             }
 
         </tbody>

@@ -1,4 +1,56 @@
 ﻿@page
 @model TodoWebApp.Pages.DeleteModel
 @{
+    ViewData["Title"] = "Confirm Delete";
 }
+
+<h2>Confirm deletion</h2>
+
+<p>Do you really want to delete:</p>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TodoItem.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TodoItem.Id)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TodoItem.TaskDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TodoItem.TaskDescription)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TodoItem.IsCompleted)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TodoItem.IsCompleted)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TodoItem.Priority)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TodoItem.Priority)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TodoItem.CreatedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TodoItem.CreatedTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Delete" asp-page-handler="Delete" asp-route-id="@Model.TodoItem.Id" class="btn btn-danger">Delete</a>
+    <a asp-page="./Index">Cancel and go back to List</a>
+</div>
