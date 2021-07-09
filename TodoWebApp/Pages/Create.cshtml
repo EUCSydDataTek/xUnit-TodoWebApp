@@ -17,6 +17,10 @@
                 <input asp-for="TodoItem.TaskDescription" class="form-control" />
                 <span asp-validation-for="TodoItem.TaskDescription" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <input asp-for="TodoItem.IsCompleted" class="form-check-input" />
+                <label asp-for="TodoItem.IsCompleted" class="form-check-label"></label>
+            </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Priority</label>
                 <select class="form-control" asp-for="TodoItem.Priority" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
@@ -24,7 +28,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" id="SubmitTodo" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

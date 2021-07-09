@@ -4,10 +4,13 @@
     ViewData["Title"] = "Todo App";
 }
 
+<partial name="_CarouselPartialView" />
+
 <h1>Todo App</h1>
+<h3 id="GenerationToken">GUID: @Model.MyGuid</h3>
 
 <p>
-    <a asp-page="Create">Create New Todo</a>
+    <a name="CreateNewTodo" class="btn btn-outline-primary" asp-page="Create">Create New Todo</a>
 </p>
 <form method="post">
     <table class="table">

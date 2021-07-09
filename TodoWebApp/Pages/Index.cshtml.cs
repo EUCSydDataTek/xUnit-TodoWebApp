@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using TodoWebApp.Data;
 using TodoWebApp.Models;
@@ -24,6 +25,8 @@ namespace TodoWebApp.Pages
 
         [BindProperty]
         public PriorityLevel Priority { get; set; }
+
+        public Guid MyGuid { get; set; } = Guid.NewGuid();
 
         public void OnGet()
         {
