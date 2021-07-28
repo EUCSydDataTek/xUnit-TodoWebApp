@@ -14,10 +14,10 @@ namespace TodoWebApp.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly ITodoService _service;
 
-        public IndexModalModel(ILogger<IndexModel> logger, ITodoService repos)
+        public IndexModalModel(ILogger<IndexModel> logger, ITodoService service)
         {
             _logger = logger;
-            _service = repos;
+            _service = service;
         }
 
         [BindProperty]
@@ -35,6 +35,21 @@ namespace TodoWebApp.Pages
         {
             await _service.UpdateIsDone(TodoItems);
             TodoItems = await _service.GetAll();
+        }
+
+        // Modal
+        [BindProperty]
+        public TodoItem TodoItem { get; set; }
+
+        public IActionResult OnPostModalAdd()
+        {
+            if (ModelState.IsValid)
+            {
+                _service.Insert(TodoItem);
+                return RedirectToPage("./IndexModal");
+            }
+
+            return Page();
         }
     }
 }
