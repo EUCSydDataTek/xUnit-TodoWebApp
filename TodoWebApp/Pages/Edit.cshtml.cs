@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Threading.Tasks;
 using TodoWebApp.Data;
 using TodoWebApp.Models;
 
@@ -8,24 +9,24 @@ namespace TodoWebApp.Pages
 {
     public class EditModel : PageModel
     {
-        private readonly IRepository _context;
+        private readonly IRepository _repos;
 
-        public EditModel(IRepository context)
+        public EditModel(IRepository repos)
         {
-            _context = context;
+            _repos = repos;
         }
 
         [BindProperty]
         public TodoItem TodoItem { get; set; }
 
-        public IActionResult OnGet(Guid id)
+        public async Task<IActionResult> OnGet(Guid id)
         {
             if (id == Guid.Empty)
             {
                 return NotFound();
             }
 
-            TodoItem = _context.GetItemById(id);
+            TodoItem = await _repos.GetItemById(id);
 
             if (TodoItem == null)
             {
@@ -36,14 +37,14 @@ namespace TodoWebApp.Pages
 
         public IActionResult OnPost(TodoItem TodoItem)
         {
-            _context.Update(TodoItem);
+            _repos.Update(TodoItem);
 
             return RedirectToPage("./Index");
         }
 
-        private bool PersonExists(Guid id)
+        private async Task<bool> PersonExists(Guid id)
         {
-            TodoItem p = _context.GetItemById(id);
+            TodoItem p = await _repos.GetItemById(id);
 
             return p != null;
         }

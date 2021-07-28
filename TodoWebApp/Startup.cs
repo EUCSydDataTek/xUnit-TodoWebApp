@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TodoWebApp.Data;
+using TodoWebApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TodoWebApp
 {
@@ -24,7 +21,11 @@ namespace TodoWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<IRepository, Repository>();
+            services.AddScoped<IRepository, Repository>();
+
+            //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+
+            services.AddDbContext<TodoContext>(options => options.UseSqlite(Configuration.GetConnectionString("TodoSqlLiteConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

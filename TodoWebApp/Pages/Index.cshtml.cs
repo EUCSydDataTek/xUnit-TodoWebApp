@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TodoWebApp.Data;
 using TodoWebApp.Models;
 
@@ -11,12 +12,12 @@ namespace TodoWebApp.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly IRepository _context;
+        private readonly IRepository _repos;
 
-        public IndexModel(ILogger<IndexModel> logger, IRepository context)
+        public IndexModel(ILogger<IndexModel> logger, IRepository repos)
         {
             _logger = logger;
-            _context = context;
+            _repos = repos;
         }
 
         [BindProperty]
@@ -25,21 +26,22 @@ namespace TodoWebApp.Pages
         [BindProperty]
         public PriorityLevel Priority { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            TodoItems = _context.GetAll();
+            TodoItems = await _repos.GetAll();
         }
 
-        public void OnPost()
+        public async Task OnPost()
         {
-            foreach (TodoItem item in TodoItems)
-            {
-                if (item.IsCompleted)
-                {
-                    _context.UpdateIsDone(item);
-                }
-            }
-            TodoItems = _context.GetAll();
+            //foreach (TodoItem item in TodoItems)
+            //{
+            //    if (item.IsCompleted)
+            //    {
+            //        _repos.UpdateIsDone(item);
+            //    }
+            //}
+            _repos.UpdateIsDone(TodoItems);
+            TodoItems = await _repos.GetAll();
         }
     }
 }

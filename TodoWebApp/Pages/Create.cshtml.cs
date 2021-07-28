@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 using TodoWebApp.Data;
 using TodoWebApp.Models;
 
@@ -7,11 +8,11 @@ namespace TodoWebApp.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly IRepository _context;
+        private readonly IRepository _repos;
 
-        public CreateModel(IRepository context)
+        public CreateModel(IRepository repos)
         {
-            _context = context;
+            _repos = repos;
         }
 
         public IActionResult OnGet()
@@ -23,11 +24,11 @@ namespace TodoWebApp.Pages
         public TodoItem TodoItem { get; set; }
 
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
-                _context.Insert(TodoItem);
+                await _repos.Insert(TodoItem);
                 return RedirectToPage("./Index");
             }
 
