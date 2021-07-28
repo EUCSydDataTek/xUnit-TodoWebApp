@@ -9,9 +9,9 @@ namespace TodoWebApp.Pages
 {
     public class DeleteModel : PageModel
     {
-        private readonly IRepository _repos;
+        private readonly ITodoService _repos;
 
-        public DeleteModel(IRepository repos)
+        public DeleteModel(ITodoService repos)
         {
             _repos = repos;
         }
@@ -40,7 +40,7 @@ namespace TodoWebApp.Pages
 
             if (TodoItem != null)
             {
-                _repos.Remove(TodoItem.Id);
+                await _repos.Remove(TodoItem.Id);
                 return RedirectToPage("./Index");
             }
             return NotFound();

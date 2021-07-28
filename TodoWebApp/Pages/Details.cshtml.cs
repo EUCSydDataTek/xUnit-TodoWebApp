@@ -9,9 +9,9 @@ namespace TodoWebApp.Pages
 {
     public class DetailsModel : PageModel
     {
-        private readonly IRepository _repos;
+        private readonly ITodoService _repos;
 
-        public DetailsModel(IRepository repos)
+        public DetailsModel(ITodoService repos)
         {
             _repos = repos;
         }

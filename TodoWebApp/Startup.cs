@@ -21,7 +21,7 @@ namespace TodoWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<ITodoService, TodoService>();
 
             //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 

@@ -12,9 +12,9 @@ namespace TodoWebApp.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly IRepository _repos;
+        private readonly ITodoService _repos;
 
-        public IndexModel(ILogger<IndexModel> logger, IRepository repos)
+        public IndexModel(ILogger<IndexModel> logger, ITodoService repos)
         {
             _logger = logger;
             _repos = repos;
@@ -33,14 +33,7 @@ namespace TodoWebApp.Pages
 
         public async Task OnPost()
         {
-            //foreach (TodoItem item in TodoItems)
-            //{
-            //    if (item.IsCompleted)
-            //    {
-            //        _repos.UpdateIsDone(item);
-            //    }
-            //}
-            _repos.UpdateIsDone(TodoItems);
+            await _repos.UpdateIsDone(TodoItems);
             TodoItems = await _repos.GetAll();
         }
     }

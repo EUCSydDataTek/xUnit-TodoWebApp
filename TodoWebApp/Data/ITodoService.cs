@@ -5,7 +5,7 @@ using TodoWebApp.Models;
 
 namespace TodoWebApp.Data
 {
-    public interface IRepository
+    public interface ITodoService
     {
         Task<List<TodoItem>> GetAll();
         Task<TodoItem> GetItemById(Guid id);

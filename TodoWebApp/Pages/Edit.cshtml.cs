@@ -9,9 +9,9 @@ namespace TodoWebApp.Pages
 {
     public class EditModel : PageModel
     {
-        private readonly IRepository _repos;
+        private readonly ITodoService _repos;
 
-        public EditModel(IRepository repos)
+        public EditModel(ITodoService repos)
         {
             _repos = repos;
         }

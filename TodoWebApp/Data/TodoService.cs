@@ -7,11 +7,11 @@ using TodoWebApp.Models;
 
 namespace TodoWebApp.Data
 {
-    public class Repository : IRepository
+    public class TodoService : ITodoService
     {
         private readonly TodoContext _context;
 
-        public Repository(TodoContext context)
+        public TodoService(TodoContext context)
         {
             _context = context;
             _context.Database.EnsureCreated();
