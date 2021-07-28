@@ -9,11 +9,11 @@ namespace TodoWebApp.Pages
 {
     public class EditModel : PageModel
     {
-        private readonly ITodoService _repos;
+        private readonly ITodoService _service;
 
-        public EditModel(ITodoService repos)
+        public EditModel(ITodoService service)
         {
-            _repos = repos;
+            _service = service;
         }
 
         [BindProperty]
@@ -26,7 +26,7 @@ namespace TodoWebApp.Pages
                 return NotFound();
             }
 
-            TodoItem = await _repos.GetItemById(id);
+            TodoItem = await _service.GetItemById(id);
 
             if (TodoItem == null)
             {
@@ -37,14 +37,14 @@ namespace TodoWebApp.Pages
 
         public IActionResult OnPost(TodoItem TodoItem)
         {
-            _repos.Update(TodoItem);
+            _service.Update(TodoItem);
 
             return RedirectToPage("./Index");
         }
 
         private async Task<bool> PersonExists(Guid id)
         {
-            TodoItem p = await _repos.GetItemById(id);
+            TodoItem p = await _service.GetItemById(id);
 
             return p != null;
         }

@@ -1,0 +1,101 @@
+﻿@page
+@model IndexModalModel
+@{
+    ViewData["Title"] = "Todo App";
+}
+
+<h1>Todo App</h1>
+
+<!-- Button trigger modal -->
+<div class="my-3">
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+</div>
+<!-- Modal -->
+<form method="post" asp-page-handler="ModalAdd">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tilføj ny opgave</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TodoItem.TaskDescription" class="control-label"></label>
+                        <input asp-for="TodoItem.TaskDescription" class="form-control" />
+                        <span asp-validation-for="TodoItem.TaskDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Priority</label>
+                        <select class="form-control" asp-for="TodoItem.Priority" asp-items="Html.GetEnumSelectList<@TodoWebApp.Models.PriorityLevel>()">
+                            <option value="">Choose a priority</option>
+                        </select>
+                        <span asp-validation-for="TodoItem.Priority" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].IsCompleted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].TaskDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].Priority)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].CreatedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TodoItems[0].Id)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (var i = 0; i < Model.TodoItems.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" asp-for="TodoItems[i].IsCompleted" onclick="this.form.submit()" />
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@Model.TodoItems[i].Id">@Model.TodoItems[i].TaskDescription</a>
+                    </td>
+                    <td>
+                        @Model.TodoItems[i].Priority
+                    </td>
+                    <td>
+                        @Model.TodoItems[i].CreatedTime
+                    </td>
+                    <td>
+                        <input type="hidden" asp-for="TodoItems[i].Id" />
+                        @Model.TodoItems[i].Id
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

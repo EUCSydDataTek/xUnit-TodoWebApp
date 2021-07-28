@@ -9,11 +9,11 @@ namespace TodoWebApp.Pages
 {
     public class DetailsModel : PageModel
     {
-        private readonly ITodoService _repos;
+        private readonly ITodoService _service;
 
-        public DetailsModel(ITodoService repos)
+        public DetailsModel(ITodoService service)
         {
-            _repos = repos;
+            _service = service;
         }
 
         public TodoItem TodoItem { get; set; }
@@ -25,7 +25,7 @@ namespace TodoWebApp.Pages
                 return NotFound();
             }
 
-            TodoItem = await _repos.GetItemById(id);
+            TodoItem = await _service.GetItemById(id);
 
             if (TodoItem == null)
             {

@@ -1,4 +1,4 @@
-﻿// https://www.learnrazorpages.com/razor-pages/forms/checkboxes
+// https://www.learnrazorpages.com/razor-pages/forms/checkboxes
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -9,15 +9,15 @@ using TodoWebApp.Models;
 
 namespace TodoWebApp.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModalModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ITodoService _service;
 
-        public IndexModel(ILogger<IndexModel> logger, ITodoService service)
+        public IndexModalModel(ILogger<IndexModel> logger, ITodoService repos)
         {
             _logger = logger;
-            _service = service;
+            _service = repos;
         }
 
         [BindProperty]
@@ -38,3 +38,4 @@ namespace TodoWebApp.Pages
         }
     }
 }
+

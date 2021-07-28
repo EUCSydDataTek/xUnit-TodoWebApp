@@ -9,11 +9,11 @@ namespace TodoWebApp.Pages
 {
     public class DeleteModel : PageModel
     {
-        private readonly ITodoService _repos;
+        private readonly ITodoService _service;
 
-        public DeleteModel(ITodoService repos)
+        public DeleteModel(ITodoService service)
         {
-            _repos = repos;
+            _service = service;
         }
 
         public TodoItem TodoItem { get; set; }
@@ -25,7 +25,7 @@ namespace TodoWebApp.Pages
                 return NotFound();
             }
 
-            TodoItem = await _repos.GetItemById(id);
+            TodoItem = await _service.GetItemById(id);
             return Page();
         }
 
@@ -36,11 +36,11 @@ namespace TodoWebApp.Pages
                 return NotFound();
             }
 
-            TodoItem TodoItem = await _repos.GetItemById(id);
+            TodoItem TodoItem = await _service.GetItemById(id);
 
             if (TodoItem != null)
             {
-                await _repos.Remove(TodoItem.Id);
+                await _service.Remove(TodoItem.Id);
                 return RedirectToPage("./Index");
             }
             return NotFound();

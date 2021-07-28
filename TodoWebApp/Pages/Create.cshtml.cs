@@ -8,11 +8,11 @@ namespace TodoWebApp.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly ITodoService _repos;
+        private readonly ITodoService _service;
 
-        public CreateModel(ITodoService repos)
+        public CreateModel(ITodoService service)
         {
-            _repos = repos;
+            _service = service;
         }
 
         public IActionResult OnGet()
@@ -28,7 +28,7 @@ namespace TodoWebApp.Pages
         {
             if (ModelState.IsValid)
             {
-                await _repos.Insert(TodoItem);
+                await _service.Insert(TodoItem);
                 return RedirectToPage("./Index");
             }
 
