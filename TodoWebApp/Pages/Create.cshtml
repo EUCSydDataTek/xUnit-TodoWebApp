@@ -22,6 +22,7 @@
                 <select class="form-control" asp-for="TodoItem.Priority" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
                     <option value="">Choose a priority</option>
                 </select>
+                <span asp-validation-for="TodoItem.Priority" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -7,18 +7,17 @@ namespace TodoWebApp.Models
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Display(Name = "Dato")]
+        [Display(Name = "Created Time")]
         public DateTime CreatedTime { get; set; } = DateTime.Now;
 
         [Required]
         [StringLength(25)]
-        [Display(Name = "Opgave")]
+        [Display(Name = "Task")]
         public string TaskDescription { get; set; }
 
-        [Display(Name = "Prioritet")]
         public PriorityLevel Priority { get; set; } = PriorityLevel.Normal;
 
-        [Display(Name = "Udført")]
+        [Display(Name = "Completed")]
         public bool IsCompleted { get; set; } = false;
     }
 
