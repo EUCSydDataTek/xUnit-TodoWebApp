@@ -14,7 +14,7 @@ namespace TodoWebApp.Data
         public TodoService(TodoContext context)
         {
             _context = context;
-            _context.Database.EnsureCreated();
+            //_context.Database.EnsureCreated();
         }
 
         public async Task<List<TodoItem>> GetAll()
