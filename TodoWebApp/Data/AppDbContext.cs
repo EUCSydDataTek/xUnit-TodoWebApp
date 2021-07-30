@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TodoWebApp.Models
+namespace TodoWebApp.Data
 {
-    public class TodoContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }

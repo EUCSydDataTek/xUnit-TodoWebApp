@@ -3,24 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoWebApp.Models;
+using TodoWebApp.Data;
 
-namespace TodoWebApp.Data
+namespace TodoWebApp.Services
 {
     public class TodoService : ITodoService
     {
-        private readonly TodoContext _context;
+        private readonly AppDbContext _context;
 
-        public TodoService(TodoContext context)
+        public TodoService(AppDbContext context)
         {
             _context = context;
-            //_context.Database.EnsureCreated();
+            _context.Database.EnsureCreated();
         }
 
         public async Task<List<TodoItem>> GetAll()
         {
-            //return await _context.TodoItems;
-            return await _context.TodoItems.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).ToListAsync();
+            return await _context.TodoItems.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<TodoItem>> GetAllCompleted()
+        {
+            return await _context.TodoItems.Where(t => t.IsCompleted == true).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
+        }
+
+        public virtual async Task<List<TodoItem>> GetAllNotCompleted()
+        {
+            return await _context.TodoItems.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
         }
 
         public async Task<TodoItem> GetItemById(Guid id)
@@ -47,17 +56,11 @@ namespace TodoWebApp.Data
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateIsDone(List<TodoItem> todoItems)
+        public async Task UpdateIsDone(TodoItem item)
         {
-            foreach (TodoItem item in todoItems)
-            {
-                if (item.IsCompleted)
-                {
-                    var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == item.Id);
-                    changedItem.IsCompleted = item.IsCompleted;
-                    await _context.SaveChangesAsync();
-                }
-            }
+            var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == item.Id);
+            changedItem.IsCompleted = true;
+            await _context.SaveChangesAsync();
         }
     }
 }

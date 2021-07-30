@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Priority</label>
-                        <select class="form-control" asp-for="TodoItem.Priority" asp-items="Html.GetEnumSelectList<@TodoWebApp.Models.PriorityLevel>()">
+                        <select class="form-control" asp-for="TodoItem.Priority" asp-items="Html.GetEnumSelectList<@TodoWebApp.Data.PriorityLevel>()">
                             <option value="">Choose a priority</option>
                         </select>
                         <span asp-validation-for="TodoItem.Priority" class="text-danger"></span>

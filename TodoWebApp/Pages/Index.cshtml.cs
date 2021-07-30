@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TodoWebApp.Services;
 using TodoWebApp.Data;
-using TodoWebApp.Models;
+using System.Linq;
 
 namespace TodoWebApp.Pages
 {
@@ -26,14 +27,16 @@ namespace TodoWebApp.Pages
         [BindProperty]
         public PriorityLevel Priority { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             TodoItems = await _service.GetAll();
         }
 
-        public async Task OnPost()
+        public async Task OnPostAsync()
         {
-            await _service.UpdateIsDone(TodoItems);
+            TodoItem item = TodoItems.FirstOrDefault(t => t.IsCompleted == true);
+
+            await _service.UpdateIsDone(item);
             TodoItems = await _service.GetAll();
         }
     }

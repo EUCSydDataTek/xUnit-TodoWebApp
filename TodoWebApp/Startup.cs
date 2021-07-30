@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TodoWebApp.Services;
 using TodoWebApp.Data;
-using TodoWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace TodoWebApp
@@ -25,7 +25,7 @@ namespace TodoWebApp
 
             //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 
-            services.AddDbContext<TodoContext>(options => options.UseSqlite(Configuration.GetConnectionString("TodoSqlLiteConnection")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("TodoSqlLiteConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

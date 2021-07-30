@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using TodoWebApp.Services;
 using TodoWebApp.Data;
-using TodoWebApp.Models;
 
 namespace TodoWebApp.Pages
 {
@@ -33,7 +34,9 @@ namespace TodoWebApp.Pages
 
         public async Task OnPost()
         {
-            await _service.UpdateIsDone(TodoItems);
+            TodoItem item = TodoItems.FirstOrDefault(t => t.IsCompleted == true);
+
+            await _service.UpdateIsDone(item);
             TodoItems = await _service.GetAll();
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TodoWebApp.Models
+namespace TodoWebApp.Data
 {
     public class TodoItem
     {
