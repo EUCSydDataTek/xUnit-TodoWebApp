@@ -1,19 +1,7 @@
-# 2.RazorPages_xUnitTest
+# 1.WebApp
 
-Projektet er af typen **xUnit**
+Består af en Razor Pages applikation med tilhørende service-klasse. Data gemmes enten **InMemory** eller i en **Sqlite** database.
 
-Opret unit test project, se [Getting Started with xUnit.net](https://xunit.net/docs/getting-started/netcore/visual-studio)
+`Index` pagen demonstrerer automatisk check af udført opgave vha. **link med indhold i form af en HTML Entity** for hhv. checked og uncheced option kontrol.
 
-Opret reference fra Test projetet til TodoWebApp.
-
-Tilføj evt. NuGet pakken: ```Microsoft.EntityFrameworkCore.InMemory``` til projektet med Contexten.
-
-Husk at fjerne evt. seeding af data.
-
-### TodoServiceUnitTest
-
-TodoServiceUnitTest klassen demonstrer Unit Test af hovedsageligt **ServiceLayer**, eftersom databasen er *InMemory* og derfor
-ikke fungerer helt som en "rigtig" SQL server.
-
-### IndexPageTests
-
+`IndexModal` pagen demonstrerer **Bootstraps Modal komponent** og automatisk updatering og **submit med JavaScript** når et Todo item markeres som udført.
