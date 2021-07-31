@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoWebApp.Services;
 using TodoWebApp.Data;
 using TodoWebApp.UnitTest.Utilities;
 using Xunit;
@@ -70,7 +69,7 @@ namespace TodoWebApp.UnitTest
                 await service.Insert(itemThird);
 
                 // ACT
-                await service.UpdateIsDone(itemThird);     // simulating an item is being checked
+                await service.UpdateIsDone(itemThird.Id);     // simulating an item is being checked
 
                 // ASSERT
                 var todoList = await service.GetAllNotCompleted();

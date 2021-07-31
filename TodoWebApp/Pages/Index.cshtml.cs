@@ -2,12 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TodoWebApp.Services;
 using TodoWebApp.Data;
-using System.Linq;
-using System;
+using TodoWebApp.Services;
 
 namespace TodoWebApp.Pages
 {
