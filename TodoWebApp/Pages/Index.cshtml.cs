@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TodoWebApp.Services;
 using TodoWebApp.Data;
 using System.Linq;
+using System;
 
 namespace TodoWebApp.Pages
 {
@@ -27,16 +28,15 @@ namespace TodoWebApp.Pages
         [BindProperty]
         public PriorityLevel Priority { get; set; }
 
-        public async Task OnGetAsync()
+
+        public async Task OnGetCheckAsync(Guid id)
         {
+            await _service.UpdateIsDone(id);
             TodoItems = await _service.GetAll();
         }
 
-        public async Task OnPostAsync()
+        public async Task OnGetAsync()
         {
-            TodoItem item = TodoItems.FirstOrDefault(t => t.IsCompleted == true);
-
-            await _service.UpdateIsDone(item);
             TodoItems = await _service.GetAll();
         }
     }

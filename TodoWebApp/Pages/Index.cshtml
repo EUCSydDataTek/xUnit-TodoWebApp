@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:Guid?}/{handler?}"
 @model IndexModel
 @{
     ViewData["Title"] = "Todo App";
@@ -36,7 +36,10 @@
             {
             <tr>
                 <td>
-                    <input type="checkbox" asp-for="TodoItems[i].IsCompleted" onclick="this.form.submit()" />
+                    @{
+                        string icon = Model.TodoItems[i].IsCompleted ? "&#x2611" : "&#x2610";
+                    }
+                    <a class="text-decoration-none" asp-page="./Index" asp-page-handler="Check" asp-route-id="@Model.TodoItems[i].Id">@Html.Raw(@icon)</a>
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@Model.TodoItems[i].Id">@Model.TodoItems[i].TaskDescription</a>

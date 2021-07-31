@@ -56,10 +56,10 @@ namespace TodoWebApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateIsDone(TodoItem item)
+        public async Task UpdateIsDone(Guid id)
         {
-            var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == item.Id);
-            changedItem.IsCompleted = true;
+            var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+            changedItem.IsCompleted = !changedItem.IsCompleted;
             await _context.SaveChangesAsync();
         }
     }

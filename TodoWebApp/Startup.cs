@@ -23,9 +23,9 @@ namespace TodoWebApp
             services.AddRazorPages();
             services.AddScoped<ITodoService, TodoService>();
 
-            //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("TodoSqlLiteConnection")));
+            // services.AddDbContext<AppDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("TodoSqlLiteConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

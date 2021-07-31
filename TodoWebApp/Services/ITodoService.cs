@@ -13,7 +13,7 @@ namespace TodoWebApp.Services
         Task<TodoItem> GetItemById(Guid id);
         Task Insert(TodoItem todoItem);
         Task Update(TodoItem todoItem);
-        Task UpdateIsDone(TodoItem todoItem);
+        Task UpdateIsDone(Guid id);
         Task Remove(Guid id);
     }
 }

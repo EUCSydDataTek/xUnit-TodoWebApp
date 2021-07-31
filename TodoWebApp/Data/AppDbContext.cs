@@ -15,7 +15,7 @@ namespace TodoWebApp.Data
         {
             modelBuilder.Entity<TodoItem>().HasData(
                 new TodoItem { TaskDescription = "Task 1", Priority = PriorityLevel.Low },
-                new TodoItem { TaskDescription = "Task 2", IsCompleted = false },
+                new TodoItem { TaskDescription = "Task 2", IsCompleted = true },
                 new TodoItem { TaskDescription = "Task 3", IsCompleted = false, Priority = PriorityLevel.High }
                 );
         }

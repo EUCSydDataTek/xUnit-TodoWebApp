@@ -29,15 +29,18 @@ namespace TodoWebApp.Pages
 
         public async Task OnGet()
         {
-            TodoItems = await _service.GetAll();
+            TodoItems = await _service.GetAllNotCompleted();
         }
 
         public async Task OnPost()
         {
+            // Bemærk at denne måde at finde det selectede item på kræver at der ikke vises andre selectede items forinden.
+            // Dvs. at man skal benytte GetAllNotCompleted() metoden og ikke GetAll() til at præsenterer items.
             TodoItem item = TodoItems.FirstOrDefault(t => t.IsCompleted == true);
 
-            await _service.UpdateIsDone(item);
-            TodoItems = await _service.GetAll();
+            await _service.UpdateIsDone(item.Id);
+
+            TodoItems = await _service.GetAllNotCompleted();
         }
 
         // Modal
