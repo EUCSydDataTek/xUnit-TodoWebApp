@@ -1,66 +1,61 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TodoWebApp.Data;
 
-namespace TodoWebApp.Services
+namespace TodoWebApp.Services;
+
+public class TodoService : ITodoService
 {
-    public class TodoService : ITodoService
+    private readonly AppDbContext _context;
+
+    public TodoService(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        _context = context;
+        _context.Database.EnsureCreated();
+    }
 
-        public TodoService(AppDbContext context)
-        {
-            _context = context;
-            _context.Database.EnsureCreated();
-        }
+    public async Task<List<TodoItem>> GetAll()
+    {
+        return await _context.TodoItems.AsNoTracking().ToListAsync();
+    }
 
-        public async Task<List<TodoItem>> GetAll()
-        {
-            return await _context.TodoItems.AsNoTracking().ToListAsync();
-        }
+    public async Task<List<TodoItem>> GetAllCompleted()
+    {
+        return await _context.TodoItems.Where(t => t.IsCompleted == true).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
+    }
 
-        public async Task<List<TodoItem>> GetAllCompleted()
-        {
-            return await _context.TodoItems.Where(t => t.IsCompleted == true).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
-        }
+    public virtual async Task<List<TodoItem>> GetAllNotCompleted()
+    {
+        return await _context.TodoItems.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
+    }
 
-        public virtual async Task<List<TodoItem>> GetAllNotCompleted()
-        {
-            return await _context.TodoItems.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
-        }
+    public async Task<TodoItem> GetItemById(Guid id)
+    {
+        return await _context.TodoItems.FirstOrDefaultAsync(t => t.Id == id);
+    }
 
-        public async Task<TodoItem> GetItemById(Guid id)
-        {
-            return await _context.TodoItems.FirstOrDefaultAsync(t => t.Id == id);
-        }
+    public async Task Insert(TodoItem todoItem)
+    {
+        _context.TodoItems.Add(todoItem);
+        await _context.SaveChangesAsync();
+    }
 
-        public async Task Insert(TodoItem todoItem)
-        {
-            _context.TodoItems.Add(todoItem);
-            await _context.SaveChangesAsync();
-        }
+    public async Task Update(TodoItem todoItem)
+    {
+        _context.Attach(todoItem).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+    }
 
-        public async Task Update(TodoItem todoItem)
-        {
-            _context.Attach(todoItem).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
+    public async Task Remove(Guid id)
+    {
+        TodoItem item = _context.TodoItems.Find(id);
+        _context.TodoItems.Remove(item);
+        await _context.SaveChangesAsync();
+    }
 
-        public async Task Remove(Guid id)
-        {
-            TodoItem item = _context.TodoItems.Find(id);
-            _context.TodoItems.Remove(item);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateIsDone(Guid id)
-        {
-            var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == id);
-            changedItem.IsCompleted = !changedItem.IsCompleted;
-            await _context.SaveChangesAsync();
-        }
+    public async Task UpdateIsDone(Guid id)
+    {
+        var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+        changedItem.IsCompleted = !changedItem.IsCompleted;
+        await _context.SaveChangesAsync();
     }
 }

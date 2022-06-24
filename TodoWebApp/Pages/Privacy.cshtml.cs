@@ -1,19 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class PrivacyModel : PageModel
 {
-    public class PrivacyModel : PageModel
+    private readonly ILogger<PrivacyModel> _logger;
+
+    public PrivacyModel(ILogger<PrivacyModel> logger)
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        _logger = logger;
+    }
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
-        {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
-        }
+    public void OnGet()
+    {
     }
 }

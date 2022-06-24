@@ -1,37 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Threading.Tasks;
-using TodoWebApp.Services;
 using TodoWebApp.Data;
+using TodoWebApp.Services;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly ITodoService _service;
+
+    public DetailsModel(ITodoService service)
     {
-        private readonly ITodoService _service;
+        _service = service;
+    }
 
-        public DetailsModel(ITodoService service)
+    public TodoItem TodoItem { get; set; }
+
+    public async Task<IActionResult> OnGet(Guid id)
+    {
+        if (id == Guid.Empty)
         {
-            _service = service;
+            return NotFound();
         }
 
-        public TodoItem TodoItem { get; set; }
+        TodoItem = await _service.GetItemById(id);
 
-        public async Task<IActionResult> OnGet(Guid id)
+        if (TodoItem == null)
         {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-
-            TodoItem = await _service.GetItemById(id);
-
-            if (TodoItem == null)
-            {
-                return NotFound();
-            }
-            return Page();
+            return NotFound();
         }
+        return Page();
     }
 }

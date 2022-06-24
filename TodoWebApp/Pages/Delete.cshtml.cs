@@ -1,49 +1,46 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Threading.Tasks;
-using TodoWebApp.Services;
 using TodoWebApp.Data;
+using TodoWebApp.Services;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ITodoService _service;
+
+    public DeleteModel(ITodoService service)
     {
-        private readonly ITodoService _service;
+        _service = service;
+    }
 
-        public DeleteModel(ITodoService service)
+    public TodoItem TodoItem { get; set; }
+
+    public async Task<IActionResult> OnGet(Guid id)
+    {
+        if (id == Guid.Empty)
         {
-            _service = service;
-        }
-
-        public TodoItem TodoItem { get; set; }
-
-        public async Task<IActionResult> OnGet(Guid id)
-        {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-
-            TodoItem = await _service.GetItemById(id);
-            return Page();
-        }
-
-        public async Task<IActionResult> OnGetDelete(Guid id)
-        {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-
-            TodoItem TodoItem = await _service.GetItemById(id);
-
-            if (TodoItem != null)
-            {
-                await _service.Remove(TodoItem.Id);
-                return RedirectToPage("./Index");
-            }
             return NotFound();
         }
+
+        TodoItem = await _service.GetItemById(id);
+        return Page();
+    }
+
+    public async Task<IActionResult> OnGetDelete(Guid id)
+    {
+        if (id == Guid.Empty)
+        {
+            return NotFound();
+        }
+
+        TodoItem TodoItem = await _service.GetItemById(id);
+
+        if (TodoItem != null)
+        {
+            await _service.Remove(TodoItem.Id);
+            return RedirectToPage("./Index");
+        }
+        return NotFound();
     }
 }
