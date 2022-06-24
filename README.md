@@ -13,7 +13,7 @@ Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
 > ### Oversigt over Branches
 > 
-> #### 1.WebApp
+> #### 1.TodoWebApp
 > 
 > Razor Pages, CheckBox, InMemory DB og Sqlite DB
 > 
@@ -28,7 +28,7 @@ Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
 &nbsp;
 
-# 1.WebApp
+# 1.TodoWebApp
 
 Består af en Razor Pages applikation med tilhørende service-klasse. Data gemmes enten **InMemory** eller i en **Sqlite** database.
 
