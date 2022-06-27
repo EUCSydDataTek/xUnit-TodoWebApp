@@ -28,7 +28,7 @@ Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
 &nbsp;
 
-# 1.TodoWebApp_xUnitTest_
+# 2.TodoWebApp_xUnitTest_
 
 https://www.thereformedprogrammer.net/new-features-for-unit-testing-your-entity-framework-core-5-code/
 
@@ -36,27 +36,24 @@ https://github.com/jonpsmith/efcore.testsupport
 
 https://docs.microsoft.com/en-us/ef/core/testing/testing-without-the-database
 
+[Razor Pages unit tests in ASP.NET Core](https://docs.microsoft.com/da-dk/aspnet/core/test/razor-pages-tests?view=aspnetcore-5.0)
+
+[Mock Quickstart](https://github.com/Moq/moq4/wiki/Quickstart)
+
 Tilføj et **xUnit** test project kaldet `TodoWebApp.UnitTest` til solution, se evt. [Getting Started with xUnit.net](https://xunit.net/docs/getting-started/netcore/visual-studio)
 
 Opret reference fra Test projetet til TodoWebApp.
 
-Det forudsættes at TodoWebApp projektet er sat op til at benytte InMemory databasen.
-
 Husk at fjerne seeding af data i Contexten.
 
-Ref.: [Razor Pages unit tests in ASP.NET Core](https://docs.microsoft.com/da-dk/aspnet/core/test/razor-pages-tests?view=aspnetcore-5.0)
-
-Opret static `Utillity` klassen, som vha. den statiske metode `TestDbContextOptions()` returnerer et `DbContextOptions` objekt.
-Dette sikrer at contexten er ny hver gang en ny test eksekveres.
+Tilføj følgende Nuget pakke: EfCore.TestSupport, som bl.a. opretter en SQlite database og vha. en extensionmetode gør det nemt at oprette en ny context.
 
 Der oprettes følgende tests:
 
-### TodoServiceUnitTest
+### TodoEFcoreTest
 
-`TodoServiceUnitTest` klassen demonstrerer Unit Test af hovedsageligt **ServiceLayer**, eftersom databasen er *InMemory* og derfor
-ikke fungerer helt som en "rigtig" SQL server.
+`TodoEFcoreTest` klassen demonstrerer Unit Test af database modellen og dens relationer. Vær opmærksom på at SQlite ikke simulerer en SQL database 100%.
 
-### IndexPageTests
+### TodoServiceTest
 
-`IndexPageTests` klassen demonstrerer Unit Test af hovedsageligt **PageModel** og dens GET/POST metoder. Da disse metoder som regel er meget "tynde", vil 
-værdien af Page-test være begrænset.
+`TodoServiceTest` klassen demonstrerer Unit Test af TodoService.

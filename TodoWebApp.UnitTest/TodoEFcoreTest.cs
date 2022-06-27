@@ -3,7 +3,6 @@ using TestSupport.EfHelpers;
 using TodoWebApp.Data;
 using TodoWebApp.UnitTest.Utilities;
 using Xunit.Extensions.AssertExtensions;
-using System.Linq;
 
 namespace TodoWebApp.UnitTest;
 public class TodoEFcoreTest
