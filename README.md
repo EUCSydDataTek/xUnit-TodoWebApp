@@ -2,12 +2,24 @@
 
 ## Beskrivelse
 
-TodoWebApp er en ASP.NET Core Razor Pages web applikation, som giver mulighed for at vise en liste af 
-Todo items, samt at markere et Todo item som udført ved at klikke på det. Man kan også oprette et nyt Todo item,
-enten via en ny Razor Page form eller via en Modal pop-up. Der er validation alle steder. Desuden kan man klikke
-på Todo navnet og redigere det enkelte item. Det er også muligt at slette det helt.
+TodoWebApp er en ASP.NET Core Razor Pages web applikation, hvor man kan oprette et TodoItem med følgende properties:
 
-Default pagen viser alle items, både de udførte og de ikke-udførte. DefaultModal viser kun dem, der mangler at blive udført.
+- TaskDescription
+- Priority [Low, Normal, High]
+
+Systemet opretter selv følgende properties samtidigt:
+
+- Id
+- CreatedTime
+- IsCompleted [false]
+
+"Home" (Index-page) viser en liste af alle TodoItems. Klikkes på et emne, åbnes emnet i Edit-mode og man kan ændre de forskellige properties, samt slette emnet.
+"Create Modal" (IndexModal-page) giver en ekstra mulighed for at markere et emne som udført ved at klikke Option-ikonet fra forsiden.
+Desuden kan man oprette et nyt emne i en modal boks.
+
+Der er validation alle steder. Desuden kan man klikke
+
+Index-pagen viser alle items, både de udførte og de ikke-udførte. IndexModel-pagen viser kun dem, der mangler at blive udført.
 
 Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
@@ -17,9 +29,9 @@ Der er mulighed for at benytte InMemory eller Sqlite databasen.
 > 
 > Razor Pages, CheckBox, InMemory DB og Sqlite DB
 > 
-> #### 2.RazorPages_DAL_xUnitTest
+> #### 2.TodoWebApp__xUnitTest
 > 
-> Unit test af TodoService med InMemory database samt af PageModel i RazorPages
+> Unit test af TodoService med SQLite databasen
 > 
 > #### 3.WebApp_SeleniumTest
 > 
