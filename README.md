@@ -28,10 +28,35 @@ Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
 &nbsp;
 
-# 1.TodoWebApp
+# 1.TodoWebApp_xUnitTest_
 
-Består af en Razor Pages applikation med tilhørende service-klasse. Data gemmes enten **InMemory** eller i en **Sqlite** database.
+https://www.thereformedprogrammer.net/new-features-for-unit-testing-your-entity-framework-core-5-code/
 
-`Index` pagen demonstrerer automatisk check af udført opgave vha. **link med indhold i form af en HTML Entity** for hhv. checked og uncheced option kontrol.
+https://github.com/jonpsmith/efcore.testsupport
 
-`IndexModal` pagen demonstrerer **Bootstraps Modal komponent** og automatisk updatering og **submit med JavaScript** når et Todo item markeres som udført.
+https://docs.microsoft.com/en-us/ef/core/testing/testing-without-the-database
+
+Tilføj et **xUnit** test project kaldet `TodoWebApp.UnitTest` til solution, se evt. [Getting Started with xUnit.net](https://xunit.net/docs/getting-started/netcore/visual-studio)
+
+Opret reference fra Test projetet til TodoWebApp.
+
+Det forudsættes at TodoWebApp projektet er sat op til at benytte InMemory databasen.
+
+Husk at fjerne seeding af data i Contexten.
+
+Ref.: [Razor Pages unit tests in ASP.NET Core](https://docs.microsoft.com/da-dk/aspnet/core/test/razor-pages-tests?view=aspnetcore-5.0)
+
+Opret static `Utillity` klassen, som vha. den statiske metode `TestDbContextOptions()` returnerer et `DbContextOptions` objekt.
+Dette sikrer at contexten er ny hver gang en ny test eksekveres.
+
+Der oprettes følgende tests:
+
+### TodoServiceUnitTest
+
+`TodoServiceUnitTest` klassen demonstrerer Unit Test af hovedsageligt **ServiceLayer**, eftersom databasen er *InMemory* og derfor
+ikke fungerer helt som en "rigtig" SQL server.
+
+### IndexPageTests
+
+`IndexPageTests` klassen demonstrerer Unit Test af hovedsageligt **PageModel** og dens GET/POST metoder. Da disse metoder som regel er meget "tynde", vil 
+værdien af Page-test være begrænset.

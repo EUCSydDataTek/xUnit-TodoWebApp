@@ -16,9 +16,9 @@ public class DetailsModel : PageModel
 
     public TodoItem TodoItem { get; set; }
 
-    public async Task<IActionResult> OnGet(Guid id)
+    public async Task<IActionResult> OnGet(int id = 0)
     {
-        if (id == Guid.Empty)
+        if (id == 0)
         {
             return NotFound();
         }

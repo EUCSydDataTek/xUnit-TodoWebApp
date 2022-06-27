@@ -24,7 +24,7 @@ public class IndexModel : PageModel
     public PriorityLevel Priority { get; set; }
 
 
-    public async Task OnGetCheckAsync(Guid id)
+    public async Task OnGetCheckAsync(int id)
     {
         await _service.UpdateIsDone(id);
         TodoItems = await _service.GetAll();

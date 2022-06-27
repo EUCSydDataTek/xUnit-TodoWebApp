@@ -17,9 +17,9 @@ public class EditModel : PageModel
     [BindProperty]
     public TodoItem TodoItem { get; set; }
 
-    public async Task<IActionResult> OnGet(Guid id)
+    public async Task<IActionResult> OnGet(int id = 0)
     {
-        if (id == Guid.Empty)
+        if (id == 0)
         {
             return NotFound();
         }
@@ -40,7 +40,7 @@ public class EditModel : PageModel
         return RedirectToPage("./Index");
     }
 
-    private async Task<bool> PersonExists(Guid id)
+    private async Task<bool> PersonExists(int id)
     {
         TodoItem p = await _service.GetItemById(id);
 

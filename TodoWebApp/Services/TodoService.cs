@@ -28,7 +28,7 @@ public class TodoService : ITodoService
         return await _context.TodoItems.Where(t => t.IsCompleted == false).OrderBy(t => t.CreatedTime).AsNoTracking().ToListAsync();
     }
 
-    public async Task<TodoItem> GetItemById(Guid id)
+    public async Task<TodoItem> GetItemById(int id)
     {
         return await _context.TodoItems.FirstOrDefaultAsync(t => t.Id == id);
     }
@@ -45,14 +45,14 @@ public class TodoService : ITodoService
         await _context.SaveChangesAsync();
     }
 
-    public async Task Remove(Guid id)
+    public async Task Remove(int id)
     {
-        TodoItem item = _context.TodoItems.Find(id);
-        _context.TodoItems.Remove(item);
+        //TodoItem item = _context.TodoItems.Include(t => t.SubTasks).Where(t => t.Id == id).FirstOrDefault();
+        //_context.TodoItems.Remove(item);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateIsDone(Guid id)
+    public async Task UpdateIsDone(int id)
     {
         var changedItem = _context.TodoItems.FirstOrDefault(t => t.Id == id);
         changedItem.IsCompleted = !changedItem.IsCompleted;

@@ -16,9 +16,9 @@ public class DeleteModel : PageModel
 
     public TodoItem TodoItem { get; set; }
 
-    public async Task<IActionResult> OnGet(Guid id)
+    public async Task<IActionResult> OnGet(int id = 0)
     {
-        if (id == Guid.Empty)
+        if (id == 0)
         {
             return NotFound();
         }
@@ -27,9 +27,9 @@ public class DeleteModel : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnGetDelete(Guid id)
+    public async Task<IActionResult> OnGetDelete(int id = 0)
     {
-        if (id == Guid.Empty)
+        if (id == 0)
         {
             return NotFound();
         }

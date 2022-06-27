@@ -7,9 +7,9 @@ public interface ITodoService
     Task<List<TodoItem>> GetAll();
     Task<List<TodoItem>> GetAllCompleted();
     Task<List<TodoItem>> GetAllNotCompleted();
-    Task<TodoItem> GetItemById(Guid id);
+    Task<TodoItem> GetItemById(int id);
     Task Insert(TodoItem todoItem);
     Task Update(TodoItem todoItem);
-    Task UpdateIsDone(Guid id);
-    Task Remove(Guid id);
+    Task UpdateIsDone(int id);
+    Task Remove(int id);
 }
