@@ -1,48 +1,43 @@
-﻿// https://www.learnrazorpages.com/razor-pages/forms/checkboxes
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using TodoWebApp.Data;
 using TodoWebApp.Models;
+using TodoWebApp.Services;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ILogger<IndexModel> _logger;
+    private readonly ITodoService _context;
+
+    public IndexModel(ILogger<IndexModel> logger, ITodoService context)
     {
-        private readonly ILogger<IndexModel> _logger;
-        private readonly IRepository _context;
+        _logger = logger;
+        _context = context;
+    }
 
-        public IndexModel(ILogger<IndexModel> logger, IRepository context)
+    [BindProperty]
+    public List<TodoItem> TodoItems { get; set; }
+
+    [BindProperty]
+    public PriorityLevel Priority { get; set; }
+
+    public Guid MyGuid { get; set; } = Guid.NewGuid();
+
+    public void OnGet()
+    {
+        TodoItems = _context.GetAll();
+    }
+
+    public void OnPost()
+    {
+        foreach (TodoItem item in TodoItems)
         {
-            _logger = logger;
-            _context = context;
-        }
-
-        [BindProperty]
-        public List<TodoItem> TodoItems { get; set; }
-
-        [BindProperty]
-        public PriorityLevel Priority { get; set; }
-
-        public Guid MyGuid { get; set; } = Guid.NewGuid();
-
-        public void OnGet()
-        {
-            TodoItems = _context.GetAll();
-        }
-
-        public void OnPost()
-        {
-            foreach (TodoItem item in TodoItems)
+            if (item.IsCompleted)
             {
-                if (item.IsCompleted)
-                {
-                    _context.UpdateIsDone(item);
-                }
+                _context.UpdateIsDone(item);
             }
-            TodoItems = _context.GetAll();
         }
+        TodoItems = _context.GetAll();
     }
 }

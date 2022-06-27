@@ -1,51 +1,49 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using TodoWebApp.Data;
 using TodoWebApp.Models;
+using TodoWebApp.Services;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    private readonly ITodoService _context;
+
+    public EditModel(ITodoService context)
     {
-        private readonly IRepository _context;
+        _context = context;
+    }
 
-        public EditModel(IRepository context)
+    [BindProperty]
+    public TodoItem TodoItem { get; set; }
+
+    public IActionResult OnGet(Guid id)
+    {
+        if (id == Guid.Empty)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public TodoItem TodoItem { get; set; }
+        TodoItem = _context.GetItemById(id);
 
-        public IActionResult OnGet(Guid id)
+        if (TodoItem == null)
         {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-
-            TodoItem = _context.GetItemById(id);
-
-            if (TodoItem == null)
-            {
-                return NotFound();
-            }
-            return Page();
+            return NotFound();
         }
+        return Page();
+    }
 
-        public IActionResult OnPost(TodoItem TodoItem)
-        {
-            _context.Update(TodoItem);
+    public IActionResult OnPost(TodoItem TodoItem)
+    {
+        _context.Update(TodoItem);
 
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
+    }
 
-        private bool PersonExists(Guid id)
-        {
-            TodoItem p = _context.GetItemById(id);
+    private bool PersonExists(Guid id)
+    {
+        TodoItem p = _context.GetItemById(id);
 
-            return p != null;
-        }
+        return p != null;
     }
 }

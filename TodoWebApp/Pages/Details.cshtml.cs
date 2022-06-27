@@ -1,36 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using TodoWebApp.Data;
 using TodoWebApp.Models;
+using TodoWebApp.Services;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly ITodoService _context;
+
+    public DetailsModel(ITodoService context)
     {
-        private readonly IRepository _context;
+        _context = context;
+    }
 
-        public DetailsModel(IRepository context)
+    public TodoItem TodoItem { get; set; }
+
+    public IActionResult OnGet(Guid id)
+    {
+        if (id == Guid.Empty)
         {
-            _context = context;
+            return NotFound();
         }
 
-        public TodoItem TodoItem { get; set; }
+        TodoItem = _context.GetItemById(id);
 
-        public IActionResult OnGet(Guid id)
+        if (TodoItem == null)
         {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-
-            TodoItem = _context.GetItemById(id);
-
-            if (TodoItem == null)
-            {
-                return NotFound();
-            }
-            return Page();
+            return NotFound();
         }
+        return Page();
     }
 }

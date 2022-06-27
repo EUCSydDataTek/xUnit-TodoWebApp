@@ -1,37 +1,36 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TodoWebApp.Data;
 using TodoWebApp.Models;
+using TodoWebApp.Services;
 
-namespace TodoWebApp.Pages
+namespace TodoWebApp.Pages;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly ITodoService _context;
+
+    public CreateModel(ITodoService context)
     {
-        private readonly IRepository _context;
+        _context = context;
+    }
 
-        public CreateModel(IRepository context)
+    public IActionResult OnGet()
+    {
+        return Page();
+    }
+
+    [BindProperty]
+    public TodoItem TodoItem { get; set; }
+
+
+    public IActionResult OnPost()
+    {
+        if (ModelState.IsValid)
         {
-            _context = context;
+            _context.Insert(TodoItem);
+            return RedirectToPage("./Index");
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
-        [BindProperty]
-        public TodoItem TodoItem { get; set; }
-
-
-        public IActionResult OnPost()
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Insert(TodoItem);
-                return RedirectToPage("./Index");
-            }
-
-            return Page();           
-        }
+        return Page();           
     }
 }
