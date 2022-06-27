@@ -47,8 +47,8 @@ public class TodoService : ITodoService
 
     public async Task Remove(int id)
     {
-        //TodoItem item = _context.TodoItems.Include(t => t.SubTasks).Where(t => t.Id == id).FirstOrDefault();
-        //_context.TodoItems.Remove(item);
+        TodoItem item = _context.TodoItems.Include(t => t.SubTasks).Where(t => t.Id == id).FirstOrDefault();
+        _context.TodoItems.Remove(item);
         await _context.SaveChangesAsync();
     }
 
