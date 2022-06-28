@@ -22,7 +22,7 @@ public class TodoItem
 
     public int SubTask { get; set; }                 // FK
 
-    public List<SubTask> SubTasks { get; set; }  = new List<SubTask>();     // Hvis man glemmer at oprettet List-objektet, vil testen Correct_simulation_of_Disconnected_Data_in_Database() fejle!
+    public List<SubTask> SubTasks { get; set; } //  = new List<SubTask>();     // Hvis man glemmer at oprettet List-objektet, vil testen Correct_simulation_of_Disconnected_Data_in_Database() fejle!
 }
 
 public enum PriorityLevel
