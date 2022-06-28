@@ -4,7 +4,7 @@
 
 ## Beskrivelse
 
-TodoWebApp er en ASP.NET Core Razor Pages web applikation, som giver mulighed for at vise en liste af 
+TodoWebApp er en ASP.NET Core Razor Pages web applikation, som giver mulighed for at vise en liste af  
 Todo items, samt at markere et Todo item som udført ved at klikke på det. Man kan også oprette et nyt Todo item,
 enten via en ny Razor Page form eller via en Modal pop-up. Der er validation alle steder. Desuden kan man klikke
 på Todo navnet og redigere det enkelte item. Det er også muligt at slette det helt.
