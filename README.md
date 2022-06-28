@@ -2,24 +2,24 @@
 
 ## Beskrivelse
 
-TodoWebApp er en ASP.NET Core Razor Pages web applikation, hvor man kan oprette et TodoItem med følgende properties:
+TodoWebApp er en ASP.NET Core Razor Pages web applikation, hvor man kan oprette et TodoItem med fÃ¸lgende properties:
 
 - TaskDescription
 - Priority [Low, Normal, High]
 
-Systemet opretter selv følgende properties samtidigt:
+Systemet opretter selv fÃ¸lgende properties samtidigt:
 
 - Id
 - CreatedTime
 - IsCompleted [false]
 
-"Home" (Index-page) viser en liste af alle TodoItems. Klikkes på et emne, åbnes emnet i Edit-mode og man kan ændre de forskellige properties, samt slette emnet.
-"Create Modal" (IndexModal-page) giver en ekstra mulighed for at markere et emne som udført ved at klikke Option-ikonet fra forsiden.
+"Home" (Index-page) viser en liste af alle TodoItems. Klikkes pÃ¥ et emne, Ã¥bnes emnet i Edit-mode og man kan Ã¦ndre de forskellige properties, samt slette emnet.
+"Create Modal" (IndexModal-page) giver en ekstra mulighed for at markere et emne som udfÃ¸rt ved at klikke Option-ikonet fra forsiden.
 Desuden kan man oprette et nyt emne i en modal boks.
 
 Der er validation alle steder. Desuden kan man klikke
 
-Index-pagen viser alle items, både de udførte og de ikke-udførte. IndexModel-pagen viser kun dem, der mangler at blive udført.
+Index-pagen viser alle items, bÃ¥de de udfÃ¸rte og de ikke-udfÃ¸rte. IndexModel-pagen viser kun dem, der mangler at blive udfÃ¸rt.
 
 Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
@@ -42,8 +42,10 @@ Der er mulighed for at benytte InMemory eller Sqlite databasen.
 
 # 1.TodoWebApp
 
-Består af en Razor Pages applikation med tilhørende service-klasse. Data gemmes enten **InMemory** eller i en **Sqlite** database.
+BestÃ¥r af en Razor Pages applikation med tilhÃ¸rende service-klasse. Data gemmes enten **InMemory** eller i en **Sqlite** database.
 
-`Index` pagen demonstrerer automatisk check af udført opgave vha. **link med indhold i form af en HTML Entity** for hhv. checked og uncheced option kontrol.
+`Index` pagen demonstrerer automatisk check af udfÃ¸rt opgave vha. **link med indhold i form af en HTML Entity** for hhv. checked og uncheced option kontrol.
 
-`IndexModal` pagen demonstrerer **Bootstraps Modal komponent** og automatisk updatering og **submit med JavaScript** når et Todo item markeres som udført.
+`IndexModal` pagen demonstrerer **Bootstraps Modal komponent** og automatisk updatering og **submit med JavaScript** nÃ¥r et Todo item markeres som udfÃ¸rt.
+
+Pull Request
