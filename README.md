@@ -9,7 +9,7 @@ Todo items, samt at markere et Todo item som udført ved at klikke på det. Man ka
 enten via en ny Razor Page form eller via en Modal pop-up. Der er validation alle steder. Desuden kan man klikke
 på Todo navnet og redigere det enkelte item. Det er også muligt at slette det helt.
 
-Default pagen viser alle items, både de udførte og de ikke-udførte. DefaultModal viser kun dem, der mangler at blive udført.
+Default pagen viser alle items, både de udførte og de ikke-udførte. DefaultModal viser kun dem, der mangler at blive udført. 
 
 Der er mulighed for at benytte InMemory eller Sqlite databasen. 
 
