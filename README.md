@@ -1,5 +1,7 @@
 # Todo projektet 
 
+[![.NET](https://github.com/EgonRasmussen/TodoWebApp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/EgonRasmussen/TodoWebApp/actions/workflows/dotnet.yml)
+
 ## Beskrivelse
 
 TodoWebApp er en ASP.NET Core Razor Pages web applikation, som giver mulighed for at vise en liste af 
