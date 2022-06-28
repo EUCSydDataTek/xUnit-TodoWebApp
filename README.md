@@ -2,7 +2,7 @@
 
 [![.NET](https://github.com/EgonRasmussen/TodoWebApp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/EgonRasmussen/TodoWebApp/actions/workflows/dotnet.yml)
 
-## Beskrivelse
+## Beskrivelsen
 
 TodoWebApp er en ASP.NET Core Razor Pages web applikation, som giver mulighed for at vise en liste af  
 Todo items, samt at markere et Todo item som udført ved at klikke på det. Man kan også oprette et nyt Todo item,
