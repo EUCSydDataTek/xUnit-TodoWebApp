@@ -9,7 +9,7 @@ på Todo navnet og redigere det enkelte item. Det er også muligt at slette det he
 
 Default pagen viser alle items, både de udførte og de ikke-udførte. DefaultModal viser kun dem, der mangler at blive udført.
 
-Der er mulighed for at benytte InMemory eller Sqlite databasen.
+Der er mulighed for at benytte InMemory eller Sqlite databasen. 
 
 > ### Oversigt over Branches
 > 
