@@ -52,10 +52,10 @@ Tilføj følgende Nuget pakke: **EfCore.TestSupport**, som bl.a. opretter en SQlit
 
 Der oprettes følgende testklasser:
 
-### TodoEFcoreTest
+### 1.TodoEFcoreTest
 
 `TodoEFcoreTest` klassen demonstrerer Unit Test af database modellen og dens relationer. Vær opmærksom på at SQlite ikke simulerer en SQL database 100%.
 
-### TodoServiceTest
+### 2.TodoServiceTest
 
 `TodoServiceTest` klassen demonstrerer Unit Test af TodoService.
