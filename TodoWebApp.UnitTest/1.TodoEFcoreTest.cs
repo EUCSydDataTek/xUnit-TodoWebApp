@@ -10,18 +10,20 @@ public class TodoEFcoreTest
     [Fact]
     public void Number_of_TodoItems_in_Database()
     {
-        //SETUP
+        //SETUP (Arrange)
         var options = SqliteInMemory.CreateOptions<AppDbContext>();
         using var context = new AppDbContext(options);
         context.Database.EnsureCreated();
         context.SeedDatabaseTodoItems();
 
-        //ATTEMPT
+        //ATTEMPT (Act)
         var query = context.TodoItems;
         var todoItems = query.ToList();
 
-        //VERIFY
-        todoItems.Count.ShouldEqual(3);
+        //VERIFY (Assert)
+        Assert.Equal(3, todoItems.Count);
+        //todoItems.Count.ShouldEqual(3);
+
     }
 
     [Fact]
@@ -77,12 +79,11 @@ public class TodoEFcoreTest
         context.Database.EnsureCreated();
         context.SeedDatabaseTodoItems();
 
-        context.ChangeTracker.Clear();  // Clear the context
+        context.ChangeTracker.Clear();  // Clear the context to simulate a new context
 
         //ATTEMPT
         TodoItem todoItem = context.TodoItems
-            .OrderBy(t => t.Id)
-            .Last();
+            .OrderBy(t => t.Id).Last();
         todoItem.SubTasks.Add(new SubTask { SubTaskDescription = "En SubTask forsøges indsat" });
         context.SaveChanges();
 
@@ -97,7 +98,7 @@ public class TodoEFcoreTest
     }
 
     [Fact]
-    public void Removing_Related_SubTask_When_Deleting_a_TodoItem_in_Database()
+    public void Deleting_a_TodoItem_in_Database_With_Relating_SubTask()
     {
         //SETUP
         var options = SqliteInMemory.CreateOptions<AppDbContext>();

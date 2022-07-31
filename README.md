@@ -48,9 +48,9 @@ Opret reference fra Test projetet til TodoWebApp.
 
 Husk at fjerne seeding af data i Contexten.
 
-Tilføj følgende Nuget pakke: EfCore.TestSupport, som bl.a. opretter en SQlite database og vha. en extensionmetode gør det nemt at oprette en ny context.
+Tilføj følgende Nuget pakke: **EfCore.TestSupport**, som bl.a. opretter en SQlite database og vha. en extensionmetode gør det nemt at oprette en ny context.
 
-Der oprettes følgende tests:
+Der oprettes følgende testklasser:
 
 ### TodoEFcoreTest
 
