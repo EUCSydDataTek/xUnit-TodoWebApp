@@ -83,6 +83,7 @@ public class TodoEFcoreTest
 
         //ATTEMPT
         TodoItem todoItem = context.TodoItems
+            .Include(t => t.SubTasks)
             .OrderBy(t => t.Id).Last();
         todoItem.SubTasks.Add(new SubTask { SubTaskDescription = "En SubTask forsøges indsat" });
         context.SaveChanges();
