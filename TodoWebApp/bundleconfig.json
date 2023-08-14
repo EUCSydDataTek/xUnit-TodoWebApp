@@ -1,0 +1,16 @@
+[
+  {
+    "outputFileName": "wwwroot/css/SiteBundle.css",
+    "inputFiles": [
+      "wwwroot/css/site.css",
+      "wwwroot/css/SiteColor.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SiteBundle.js",
+    "inputFiles": [
+      "wwwroot/js/site.js",
+      "wwwroot/js/SiteScript.js"
+    ]
+  }
+]
