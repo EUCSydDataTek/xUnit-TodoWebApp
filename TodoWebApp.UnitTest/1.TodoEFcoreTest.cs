@@ -21,7 +21,7 @@ public class TodoEFcoreTest
         var todoItems = query.ToList();
 
         //VERIFY (Assert)
-        Assert.Equal(4, todoItems.Count); // FIXED -- not
+        Assert.Equal(3, todoItems.Count);
         //todoItems.Count.ShouldEqual(3);
 
     }
