@@ -17,12 +17,12 @@ public class IndexPageTest
         using var context = new AppDbContext(options);
 
         var service = new TodoService(context);
-        var expectedTodoItems = await service.GetAllNotCompleted();
+        var expectedTodoItems = await service.GetAll();
 
         var mockTodoService = new Mock<TodoService>(context);
 
-        // Husk at GetAllNotCompleted() metoden skal være virtual!
-        mockTodoService.Setup(s => s.GetAllNotCompleted())
+        // Husk at GetAll() metoden skal være virtual!
+        mockTodoService.Setup(s => s.GetAll())
                         .Returns(Task.FromResult(expectedTodoItems));
 
         var pageModel = new IndexModel(null, mockTodoService.Object);

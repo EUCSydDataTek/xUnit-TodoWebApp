@@ -13,7 +13,7 @@ public class TodoService : ITodoService
         _context.Database.EnsureCreated();
     }
 
-    public async Task<List<TodoItem>> GetAll()
+    public virtual async Task<List<TodoItem>> GetAll()
     {
         return await _context.TodoItems.AsNoTracking().ToListAsync();
     }
