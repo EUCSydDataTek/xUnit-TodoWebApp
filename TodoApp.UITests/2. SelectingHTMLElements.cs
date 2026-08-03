@@ -9,10 +9,10 @@ namespace TodoApp.UITests;
 
 public class SelectingHTMLElements
 {
-    const string homeUrl = "https://localhost:44346/";
-    const string privacyUrl = "https://localhost:44346/Privacy";
+    const string homeUrl = "https://localhost:5002/";
+    const string privacyUrl = "https://localhost:5002/Privacy";
     const string homeTitle = "Todo App - TodoWebApp";
-    const string createUrl = "https://localhost:44346/Create";
+    const string createUrl = "https://localhost:5002/Create";
     const string createTitle = "Create - TodoWebApp";
 
     // Locate Guid element by Id and compare Guid between navigation forward and backward

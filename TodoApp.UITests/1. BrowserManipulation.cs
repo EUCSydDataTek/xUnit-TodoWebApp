@@ -8,8 +8,8 @@ namespace TodoApp.UITests;
 
 public class BrowserManipulation
 {
-    const string homeUrl = "https://localhost:44346/";
-    const string privacyUrl = "https://localhost:44346/Privacy";
+    const string homeUrl = "https://localhost:5002/";
+    const string privacyUrl = "https://localhost:5002/Privacy";
     const string homeTitle = "Todo App - TodoWebApp";
 
     [Fact]
