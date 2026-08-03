@@ -2,6 +2,8 @@
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using Xunit;
 
 namespace TodoApp.UITests;
@@ -59,6 +61,24 @@ public class BrowserManipulation
             DemoHelper.Pause();
 
             driver.Navigate().Refresh();
+
+            DemoHelper.Pause();
+
+            Assert.Equal(homeTitle, driver.Title);
+            Assert.Equal(homeUrl, driver.Url);
+        }
+    }
+
+    [Theory]
+    [InlineData(WebBrowser.Chrome)]
+    [InlineData(WebBrowser.Firefox)]
+    [InlineData(WebBrowser.edge)]
+    [Trait("Category", "Smoke")]
+    public void LoadApplicationPage_MultiBrowser(WebBrowser browser)
+    {
+        using (IWebDriver driver = DemoHelper.GetWebDriver(browser))
+        {
+            driver.Navigate().GoToUrl(homeUrl);
 
             DemoHelper.Pause();
 
